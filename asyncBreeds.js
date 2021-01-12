@@ -3,17 +3,20 @@
 // Instead they must use callback functions to pass that data back.
 
 const fs = require('fs');
+const breedDetails = require('./syncBreeds');
 
 const breedDetailsFromFile = function(breed, callback) {
   console.log('breedDetailsFromFile: Calling readFile...');
   fs.readFile(`./data/${breed}.txt`, 'utf8', (error, data) => {
     console.log("In readFile's Callback: it has the data.");
-    if (!error) callback(data);
+    callback(data);
   });
 };
 
 const show = (bombay) => console.log('Return Value: ', bombay);
 const bombay = breedDetailsFromFile('Bombay', show);
+
+module.exports = breedDetailsFromFile;
 
 // const fs = require('fs');
 
@@ -33,3 +36,9 @@ const bombay = breedDetailsFromFile('Bombay', show);
 // const bombay = breedDetailsFromFile('Bombay');
 // console.log('Return Value: ', bombay);
 // => will NOT print out details, instead we will see undefined!
+
+// Our breedDetailsFromFile function does not call the callback if an error occurs from readFile.
+// With this behavior, the caller has no way of knowing what happened.
+// Instead, it could call its callback with undefined if an error occurs
+// when looking for the appropriate text file.
+// delete the 'if(!error)'
