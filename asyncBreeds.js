@@ -15,7 +15,7 @@ const breedDetailsFromFile = function(breed, callback) {
 const show = (bombay) => console.log('Return Value: ', bombay);
 const bombay = breedDetailsFromFile('Bombay', show);
 
-const fs = require('fs');
+// const fs = require('fs');
 
 // const breedDetailsFromFile = function(breed) {
 //   console.log('breedDetailsFromFile: Calling readFile...');
